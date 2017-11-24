@@ -2,9 +2,7 @@ cmake_minimum_required(VERSION 2.8.0)
 
 project(nsf_pub)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../make)
-include (common)
+AUX_SOURCE_DIRECTORY(./inc DIR_NSF_PUB_INC)
+AUX_SOURCE_DIRECTORY(./src DIR_NSF_PUB_SRC)
 
-ice_add_library(nsf_pub
-  SOURCE_DIRS ./inc ./src
-)
+ADD_LIBRARY(nsf_pub STATIC ${DIR_NSF_PUB_INC} ${DIR_NSF_PUB_SRC})

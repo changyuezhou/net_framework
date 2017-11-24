@@ -9,7 +9,7 @@
 #include <string>
 #include <cstdio>
 #include "commlib/public/inc/type.h"
-#include "external/lib/inc/atomic.h"
+#include "commlib/magic/inc/atomic.h"
 #include "nsf/public/inc/log.h"
 
 namespace nsf {
