@@ -1,0 +1,19 @@
+*.o
+*.a
+*.log
+*.idea
+*.vpj
+*.vtg
+*.vpwhistu
+*.vpw
+*.iml
+.svn
+
+project.iml
+builder
+
+.project
+.classpath
+
+# MacOS
+.DS_Store

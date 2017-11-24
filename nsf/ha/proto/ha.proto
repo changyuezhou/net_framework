@@ -1,0 +1,9 @@
+package nsf.ha.pb;
+
+message Request {
+  optional string addr = 1;                    // 172.16.100.37:10000
+}
+
+message Response {
+  repeated string addr = 1;                    // 172.16.100.37:10000
+}
