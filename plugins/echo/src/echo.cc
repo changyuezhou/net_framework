@@ -1,7 +1,7 @@
 // Copyright (c) 2013 zhou chang yue. All rights reserved.
 
 #include <string.h>
-#include "nsf/plugins/echo/inc/echo.h"
+#include "plugins/echo/inc/echo.h"
 
 namespace nsf {
   namespace plugins {

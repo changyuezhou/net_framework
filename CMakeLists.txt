@@ -7,3 +7,4 @@ include (common)
 
 ADD_SUBDIRECTORY(commlib)
 ADD_SUBDIRECTORY(nsf)
+ADD_SUBDIRECTORY(plugins)

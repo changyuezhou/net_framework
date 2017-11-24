@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 2.8.0)
 
-project(nsf_plugins_echo)
+project(echo)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../make)
-include (common)
+AUX_SOURCE_DIRECTORY(./inc DIR_ECHO_INC)
+AUX_SOURCE_DIRECTORY(./src DIR_ECHO_SRC)
 
-ice_add_shared_library(nsf_plugins_echo
-  SOURCE_DIRS ./inc ./src
-)
+ADD_LIBRARY(echo SHARED ${DIR_ECHO_INC} ${DIR_ECHO_SRC})
