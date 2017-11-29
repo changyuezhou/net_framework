@@ -39,7 +39,7 @@
         not zero, than framework will disconnect.
 
 #### 2.1.3 TcpHandlerDisconnected <a name="TcpHandlerDisconnected"/>
-*       DEfine: INT32 TcpHandlerDisconnected(INT32 sock_fd, const CHAR * ip, INT32 port);
+*       Define: INT32 TcpHandlerDisconnected(INT32 sock_fd, const CHAR * ip, INT32 port);
 *       This interface involved by framework when socket disconnected,You can free 
 		resources that allocated by TcpHandlerConnected.
 
@@ -61,7 +61,7 @@
 ### 2.2 JOB <a name="JOB"/>
 #### 2.2.1 MsgHandleInit <a name="MsgHandleInit"/>
 *       Define: INT32 MsgHandleInit(const CHAR * file);
-*       This interface involved by frmaework when job initial.You can allocate 
+*       This interface involved by framework when job initial.You can allocate 
 		resource here.
 
 #### 2.2.2 MsgHandleProcessing <a name="MsgHandleProcessing"/>
@@ -96,7 +96,7 @@
 *       git clone --recursive https://github.com/changyuezhou/net_framework.git
         mkdir build
         cd build
-        cmake ../net_framwork
+        cmake ../net_framework
         make
         
 ##         
