@@ -15,6 +15,15 @@
 #### [2.2.3 MsgHandleFinish](#MsgHandleFinish)
 ## [3 Dependence](#dependence)
 ## [4 Compile](#compile)
+## [5 Install](#install)
+### [5.1 Install Framework](#install_framework)
+### [5.2 Install Plugins](#install_plugins)
+## [6 Dir Tree](#dir_tree)
+## [7 Configure](#configure)
+### [7.1 framework config](#framework_config)
+### [7.2 plugins config](#plugins_config)
+## [8 Running](#running)
+## [9 stop](#stop)
 --------------------
 ## 1 Introduction <a name="Introduction"/>
 *       This framework processing detail of net socket.With it, you can focus on business 
@@ -94,11 +103,14 @@
 
 ## 4 Compile <a name="compile"/>
 *       git clone --recursive https://github.com/changyuezhou/net_framework.git
+        OPTION: comment line 'add_subdirectory(db)' in net_framework/commlib/CMakeLists.txt
         mkdir build
         cd build
         cmake ../net_framework
         make
         
-##         
-             
-processing epoll model
+## 5 Install <a name="install"/>   
+## 6 Dir Tree <a name="dir_tree"/>  
+## 7 Configure <a name="configure"/>  
+## 8 Running <a name="running"/>  
+## 9 Stop <a name="stop"/>

@@ -49,7 +49,7 @@ namespace nsf {
        };
 
      public:
-       static const INT32 RECV_BUFFER_SIZE = 64*1024;
+       static const INT32 RECV_BUFFER_SIZE = 2*1024*1024;
 
      public:
        Handler(Reactor * reactor, const ServiceItem & config, UINT32 id, EventDLL * dll):id_(id), timestamp_(0),
