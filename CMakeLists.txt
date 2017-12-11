@@ -8,3 +8,5 @@ include (common)
 ADD_SUBDIRECTORY(commlib)
 ADD_SUBDIRECTORY(nsf)
 ADD_SUBDIRECTORY(plugins)
+
+execute_process(COMMAND echo "this is test")
