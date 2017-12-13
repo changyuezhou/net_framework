@@ -18,6 +18,7 @@
 ## [5 Install](#install)
 ### [5.1 Install Framework](#install_framework)
 ### [5.2 Install Plugins](#install_plugins)
+### [5.3 Install Both](#install_all)
 ## [6 Dir Tree](#dir_tree)
 ## [7 Configure](#configure)
 ### [7.1 framework config](#framework_config)
@@ -109,8 +110,36 @@
         cmake ../net_framework
         make
         
-## 5 Install <a name="install"/>   
+## 5 Install <a name="install"/>
+### 5.1 Install Framework <a name="install_framework"/>
+*       ${NET_FRAMWORK_DIR}/install/install.sh NSF [REQUIRED HOME_DIR] [REQUIRED LOG_DIR]
+        HOME_DIR: framework install dir
+        LOG_DIR: log dir
+
+### 5.2 Install Plugins <a name="install_plugins"/>
+*       ${NET_FRAMWORK_DIR}/install/install.sh PLUGIN [REQUIRED HOME_DIR] [REQUIRED LOG_DIR] [REQUIRES PLUGIN_LIB] [OPTION: PLUGIN_ETC]
+        HOME_DIR: framework install dir
+        LOG_DIR: log dir
+        PLUGIN_LIB: path of plugin lib
+        PLUGIN_ETC: path of plugin config file
+
+### 5.3 Install Both <a name="install_all"/>
+*       ${NET_FRAMWORK_DIR}/install/install.sh ALL [REQUIRED HOME_DIR] [REQUIRED LOG_DIR] [REQUIRES PLUGIN_LIB] [OPTION: PLUGIN_ETC]
+        HOME_DIR: framework install dir
+        LOG_DIR: log dir
+        PLUGIN_LIB: path of plugin lib
+        PLUGIN_ETC: path of plugin config file    
+
 ## 6 Dir Tree <a name="dir_tree"/>  
+*       ${HOME_DIR}
+        |
+        |--etc--{ap.conf, ctrl.conf, job.conf}
+        |--bin--{nsf_ctrl, nsf_ap, nsf_job}   
+        |--plugins
+           |
+           |--libs--{${PLUGIN_LIB}}
+           |--etc--{${PLUGIN_ETC}}
+           
 ## 7 Configure <a name="configure"/>  
 ## 8 Running <a name="running"/>  
 ## 9 Stop <a name="stop"/>
