@@ -25,6 +25,7 @@
 ### [7.2 plugins config](#plugins_config)
 ## [8 Running](#running)
 ## [9 stop](#stop)
+## [10 Performance](#performance)
 --------------------
 ## 1 Introduction <a name="Introduction"/>
 *       This framework processing detail of net socket.With it, you can focus on business 
@@ -139,7 +140,17 @@
            |
            |--libs--{${PLUGIN_LIB}}
            |--etc--{${PLUGIN_ETC}}
-           
+
 ## 7 Configure <a name="configure"/>  
-## 8 Running <a name="running"/>  
+### 7.1 Framework Config <a name="framework_config"/>
+*       [see etc](https://github.com/changyuezhou/net_framework/tree/master/etc)
+### 7.2 Plugins Config <a name="plugins_config"/>
+*       Do something you like :-) ...............
+
+## 8 Running <a name="running"/> 
+*       ${HOME_DIR}/bin/service.sh START
+
 ## 9 Stop <a name="stop"/>
+*       ${HOME_DIR}/bin/service.sh STOP
+
+## 10 Performance <a name="performance">
