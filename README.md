@@ -143,7 +143,7 @@
 
 ## 7 Configure <a name="configure"/>  
 ### 7.1 Framework Config <a name="framework_config"/>
-*       [see etc](https://github.com/changyuezhou/net_framework/tree/master/etc)
+*       see: https://github.com/changyuezhou/net_framework/tree/master/etc
 ### 7.2 Plugins Config <a name="plugins_config"/>
 *       Do something you like :-) ...............
 
