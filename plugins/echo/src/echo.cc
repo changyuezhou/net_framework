@@ -37,11 +37,11 @@ namespace nsf {
                               AsyncCallBackWrite func, VOID * params, INT32 params_size) {
       const CHAR * resp = "HTTP/1.1 200 OK\r\nServer: spray-can/1.3.2\r\nDate: Thu, 28 May 2015 02:28:30 GMT\r\nContent-Type: text/plain; charset=UTF-8\r\nConnection: keep-alive\r\nContent-Length: 2\n\nOK\n";
       INT32 resp_size = ::strlen(resp);
-
+/*
       if (0 != func(params, resp, resp_size)) {
 
       }
-
+*/
       *out_size = 0;
       ::memcpy(out, resp, resp_size);
       *out_size = resp_size;

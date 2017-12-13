@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 INSTALL_PATH=$0
+cd $(dirname ${INSTALL_PATH})
+INSTALL_PATH=`pwd`
 NET_FRAMEWORK_DIR=$(dirname ${INSTALL_PATH})
 BASE_DIR=$(dirname ${NET_FRAMEWORK_DIR})
 
