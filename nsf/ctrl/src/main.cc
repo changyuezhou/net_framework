@@ -37,8 +37,8 @@ VOID SigHandler(INT32 signo) {
 }
 
 INT32 main(INT32 argc, CHAR ** argv) {
-  if (2 != argc) {
-    printf("Usage: nsf_ctrl [config file]");
+  if (3 != argc) {
+    printf("Usage: nsf_ctrl [config file] [initial factor]");
     return -1;
   }
 
@@ -69,7 +69,7 @@ INT32 main(INT32 argc, CHAR ** argv) {
     return -1;
   }
 
-  result = monitor_svr.Initial();
+  result = monitor_svr.Initial(::atoi(argv[2]));
   if (0 != result) {
     NSF_CTRL_LOG_ERROR("ctrl monitor service check failed code:" << result);
   }

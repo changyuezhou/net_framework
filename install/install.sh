@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INSTALL_PATH=$(pwd)
+INSTALL_PATH=$0
 NET_FRAMEWORK_DIR=$(dirname ${INSTALL_PATH})
 BASE_DIR=$(dirname ${NET_FRAMEWORK_DIR})
 
@@ -127,6 +127,8 @@ function copy_files_to_home_dir() {
   cp "${SOURCE_DIR}/etc/ap.conf" "${HOME_DIR}/etc/"
   cp "${SOURCE_DIR}/etc/job.conf" "${HOME_DIR}/etc/"
   cp "${SOURCE_DIR}/etc/ctrl.conf" "${HOME_DIR}/etc/"
+
+  cp "${SOURCE_DIR}/bin/service.sh" "${HOME_DIR}/bin/"
 
   sed -i "s#{HOME_DIR}#${HOME_DIR}#g" `grep '{HOME_DIR}' -rl ${HOME_DIR}/etc/`
   sed -i "s#{LOG_DIR}#${LOG_DIR}#g" `grep '{LOG_DIR}' -rl ${HOME_DIR}/etc/`

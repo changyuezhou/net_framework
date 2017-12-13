@@ -21,8 +21,8 @@ namespace nsf {
        INT32 Attach(UINT32 key);
        VOID Destroy();
 
-       INT32 Recv(VOID * msg, INT32 size);
-       INT32 Send(const VOID * msg, INT32 size);
+       INT32 Recv(VOID * data, INT32 size, INT32 * type);
+       INT32 Send(const VOID * data, INT32 size, INT32 type);
 
      private:
        INT32 fd_;

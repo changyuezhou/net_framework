@@ -19,6 +19,7 @@ namespace nsf {
        static const INT32 PATH_MAX_LENGTH = 256;
        static const INT32 CMD_DO_HEARTBEAT = 1;
        static const INT32 CMD_DO_QUIT = 2;
+       static const INT32 CMD_DO_STATUS = 3;
        static const INT32 JOB_MAX_COUNT = 4;
        static const INT32 TOOL_MAX_COUNT = 4;
 
@@ -162,6 +163,11 @@ namespace nsf {
            NSF_PUBLIC_LOG_DEBUG("pid:" << pid_);
            NSF_PUBLIC_LOG_DEBUG("timestamp:" << timestamp_);
          }
+       };
+
+       struct MSG {
+         long msg_type_;
+         CHAR msg_text_[MSG_MAX_LENGTH];
        };
 
        struct Group {

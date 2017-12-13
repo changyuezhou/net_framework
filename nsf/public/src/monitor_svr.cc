@@ -302,7 +302,8 @@ namespace nsf {
       return 0;
     }
 
-    INT32 MonitorSvr::Initial() {
+    INT32 MonitorSvr::Initial(INT32 initial_check_factor) {
+      initial_check_factor_ = initial_check_factor;
       return DoCheck();
     }
 
@@ -312,9 +313,13 @@ namespace nsf {
         NSF_PUBLIC_LOG_ERROR("ctrl monitor service recv failed code:" << result);
       }
 
-      result = DoCheck();
-      if (0 != result) {
-        NSF_PUBLIC_LOG_ERROR("ctrl monitor service check failed code:" << result);
+      if (0 >= initial_check_factor_) {
+        result = DoCheck();
+        if (0 != result) {
+          NSF_PUBLIC_LOG_ERROR("ctrl monitor service check failed code:" << result);
+        }
+      } else {
+        --initial_check_factor_;
       }
 
       result = DoUpdate();
@@ -415,45 +420,48 @@ namespace nsf {
     INT32 MonitorSvr::DoRecv() {
       CHAR recv_buf[1024] = {0};
       while (TRUE) {
-        INT32 result = mq_comm_.Recv(recv_buf, sizeof(recv_buf));
+        INT32 type = 0;
+        INT32 result = mq_comm_.Recv(recv_buf, sizeof(recv_buf), &type);
         if (0 >= result) {
           break;
         }
 
-        if (sizeof(ProcHeartbeat) != result) {
-          NSF_PUBLIC_LOG_WARN("monitor service receive invalid msg code:" << result);
+        if ((ProcReport::CMD_DO_HEARTBEAT != type) && (ProcReport::CMD_DO_STATUS != type)) {
+          NSF_PUBLIC_LOG_WARN("monitor service receive invalid msg code:" << result << " type:" << type);
           continue;
         }
 
-        ProcHeartbeat * phb = reinterpret_cast<ProcHeartbeat *>(recv_buf);
-        NSF_PUBLIC_LOG_DEBUG("monitor service receive heartbeat ................................");
-        phb->Dump();
-        if (phb->gid_ == ap_.meta_.id_) {
-          result = DoRecvGroup(&ap_, phb);
-          if (0 != result) {
-            NSF_PUBLIC_LOG_WARN("monitor service do receive ap status failed code:" << result);
+        if (ProcReport::CMD_DO_HEARTBEAT == type) {
+          ProcHeartbeat * phb = reinterpret_cast<ProcHeartbeat *>(recv_buf);
+          NSF_PUBLIC_LOG_DEBUG("monitor service receive heartbeat ................................");
+          phb->Dump();
+          if (phb->gid_ == ap_.meta_.id_) {
+            result = DoRecvGroup(&ap_, phb);
+            if (0 != result) {
+              NSF_PUBLIC_LOG_WARN("monitor service do receive ap status failed code:" << result);
+            }
           }
-        }
 
-        for (INT32 i = 0; i < JOB_MAX_COUNT; ++i) {
-          if (0 < jobs_[i].meta_.id_) {
-            if (phb->gid_ == jobs_[i].meta_.id_) {
-              result = DoRecvGroup(&jobs_[i], phb);
-              if (0 != result) {
-                NSF_PUBLIC_LOG_WARN("monitor service do receive job status failed code:" << result);
-              }
-            }            
+          for (INT32 i = 0; i < JOB_MAX_COUNT; ++i) {
+            if (0 < jobs_[i].meta_.id_) {
+              if (phb->gid_ == jobs_[i].meta_.id_) {
+                result = DoRecvGroup(&jobs_[i], phb);
+                if (0 != result) {
+                  NSF_PUBLIC_LOG_WARN("monitor service do receive job status failed code:" << result);
+                }
+              }            
+            }
           }
-        }
 
-        for (INT32 i = 0; i < TOOL_MAX_COUNT; ++i) {
-          if (0 < tools_[i].meta_.id_) {
-            if (phb->gid_ == tools_[i].meta_.id_) {
-              result = DoRecvGroup(&tools_[i], phb);
-              if (0 != result) {
-                NSF_PUBLIC_LOG_WARN("monitor service do receive tool status failed code:" << result);
-              }
-            }            
+          for (INT32 i = 0; i < TOOL_MAX_COUNT; ++i) {
+            if (0 < tools_[i].meta_.id_) {
+              if (phb->gid_ == tools_[i].meta_.id_) {
+                result = DoRecvGroup(&tools_[i], phb);
+                if (0 != result) {
+                  NSF_PUBLIC_LOG_WARN("monitor service do receive tool status failed code:" << result);
+                }
+              }            
+            }
           }
         }
       }

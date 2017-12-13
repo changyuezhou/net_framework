@@ -73,12 +73,10 @@ namespace nsf {
 
       UINT32 last_check = ::time(NULL);
       UINT32 last_report = ::time(NULL);
-      INT32 count = 0;
       while (TRUE) {
         if (unlikely(!GetRunning())) {
           return 0;
         }
-        count++;
         // doing send data
         for (INT32 i = 0; i < consumer_size_; ++i) {
           INT32 size = max_receive_;
@@ -129,23 +127,20 @@ namespace nsf {
           }
         }
 
-        if (unlikely(count >= 100)) {
-          count = 0;
-          UINT32 now = ::time(NULL);
-          if (unlikely(1 <= (now - last_report))) {
-            last_report = now;
-            if (0 != cli.Report()) {
-              NSF_AP_LOG_WARN("epoll reactor report status failed code:" << errno);
+        UINT32 now = ::time(NULL);
+        if (unlikely(1 <= (now - last_report))) {
+          last_report = now;
+          if (0 != cli.Report()) {
+            NSF_AP_LOG_WARN("epoll reactor report status failed code:" << errno);
 
-              break;
-            }
+            break;
           }
-          if (unlikely(2 <= (now - last_check))) {
-            last_check = now;
-            INT32 check_timeout_result = CheckTimeout(now);
-            if (unlikely(0 != check_timeout_result)) {
-              NSF_AP_LOG_WARN("epoll reactor check timeout failed result:" << check_timeout_result);
-            }
+        }
+        if (unlikely(2 <= (now - last_check))) {
+          last_check = now;
+          INT32 check_timeout_result = CheckTimeout(now);
+          if (unlikely(0 != check_timeout_result)) {
+            NSF_AP_LOG_WARN("epoll reactor check timeout failed result:" << check_timeout_result);
           }
         }
       }
@@ -177,7 +172,7 @@ namespace nsf {
       local.Serialize(addr);
       INT32 result = 0;
       if (NULL == sock || 0 != (result = sock->Listen(local, backlog))) {
-        NSF_AP_LOG_ERROR("stream acceptor listen failed:" << result << " addr:" << local.GetPath());
+        NSF_AP_LOG_ERROR("stream acceptor listen failed:" << result << " ip:" << local.GetIp() << " port:" << local.GetPort() << " Path:" << local.GetPath());
         return NULL;
       }
 

@@ -36,12 +36,12 @@ namespace nsf {
        typedef ProcReport::ProcStatus ProcStatus;
 
      public:
-       MonitorSvr() {}
+       MonitorSvr():initial_check_factor_(3) {}
        ~MonitorSvr() { Destroy(); }
 
      public:
        INT32 Create(const conf & config);
-       INT32 Initial();
+       INT32 Initial(INT32 initial_check_factor);
        INT32 Running();
 
      public:
@@ -87,6 +87,7 @@ namespace nsf {
        INT32 DoRecvGroup(Group * gp, ProcHeartbeat * phb);
 
      private:
+       INT32 initial_check_factor_;
        MQComm mq_comm_;
        AP ap_;
        JOB jobs_[JOB_MAX_COUNT];

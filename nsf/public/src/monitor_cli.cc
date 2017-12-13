@@ -19,7 +19,7 @@ namespace nsf {
 
       // NSF_PUBLIC_LOG_DEBUG("monitor client report group id:" << group_id_ << " pid:" << pid);
 
-      return mq_comm_.Send(&phb_, sizeof(phb_));
+      return mq_comm_.Send(&phb_, sizeof(phb_), ProcReport::CMD_DO_HEARTBEAT);
     }
   }  // namespace pub
 }  // namespace nsf
