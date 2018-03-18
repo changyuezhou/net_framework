@@ -28,9 +28,9 @@
 ## [10 Performance](#performance)
 --------------------
 ## 1 Introduction <a name="Introduction"/>
-*       This framework processing detail of net socket.With it, you can focus on business 
-		logic and do not care of the problem of socket and concurrence.You just need to 
-		define some interface to deal with the business logic and add it to plugins, than 
+*		This framework processes details of net sockets.With it, you can be focus on the busines
+		logics and do not care the issues of sockets and concurrences. You just need to 
+		define some interfaces to deal with the business logics and add it to plugins, then 
 		run the framework.
 
 ## 2 Interface <a name="Interface"/>
@@ -39,41 +39,42 @@
 
 #### 2.1.1 TcpHandleInit <a name="TcpHandleInit"/>
 *       Define: INT32 TcpHandleInit(const CHAR * file);
-*       This interface initial some resources for tcp handler.The parameters of file 
-		support the path of configure file.
+*       This interface initializes some resources for tcp handler. The parameter 'file'
+		supports the path of configure file.
+
 
 #### 2.1.2 TcpHandlerConnected <a name="TcpHandlerConnected"/>
 *       Define: INT32 TcpHandlerConnected(INT32 sock_fd, const CHAR * ip, INT32 port);
-*       This interface involved by framework when socket connection created.You can do 
-		some logic check for connection.
-        For example: You can verify the connection, if connection is invalid return 
-        not zero, than framework will disconnect.
+*       This interface is called by frameworks when a socket connection is created.You can do 
+		some logical check for the connection.
+        For example: You can verify the connection. If the connection is invalid, the function returns
+  		non-zero, then the framework will disconnect.
 
 #### 2.1.3 TcpHandlerDisconnected <a name="TcpHandlerDisconnected"/>
 *       Define: INT32 TcpHandlerDisconnected(INT32 sock_fd, const CHAR * ip, INT32 port);
-*       This interface involved by framework when socket disconnected,You can free 
-		resources that allocated by TcpHandlerConnected.
+*       This interface is called by frameworks when a socket is disconnected,You can set free resources
+		that have been allocated by TcpHandlerConnected.
 
 #### 2.1.4 FinishTcpHandle <a name="FinishTcpHandle"/>
 *       Define: INT32 FinishTcpHandle();
-*       This interface involved by framework when AP shutdown graceful.You can free 
-		resource that allocated by TcpHandleInit.
+*       This interface is called by frameworks when the AP is shutdown gracefully.You can set free 
+		resources that have been allocated by TcpHandleInit.
 
 #### 2.1.5 MsgHandleUnpack <a name="MsgHandleUnpack"/>
 *       Define: INT32 MsgHandleUnpack(const CHAR * data, INT32 size);
-*       This interface help you to split package into multiple datagrams.The return 
+*       This interface helps you to split package into multiple datagrams.The return 
 		value indicates the length of one datagram.
 
 #### 2.1.6 MsgHandleRoute <a name="MsgHandleRoute"/>
 *       Define: INT32 MsgHandleRoute(const CHAR * data, INT32 size);
-*       This interface make the Load banlance of JOB possible,The return value 
-		indicates the ID of JOB.
+*       This interface makes the load banlance of JOBs, the return value 
+  		indicates the ID of one JOB.
 
 ### 2.2 JOB <a name="JOB"/>
 #### 2.2.1 MsgHandleInit <a name="MsgHandleInit"/>
 *       Define: INT32 MsgHandleInit(const CHAR * file);
-*       This interface involved by framework when job initial.You can allocate 
-		resource here.
+*       This interface is called by frameworks when a job is initialized.You can allocate 
+		resources here.
 
 #### 2.2.2 MsgHandleProcessing <a name="MsgHandleProcessing"/>
 *       Define: INT32 MsgHandleProcessing(const CHAR * data, INT32 size, CHAR * out, 
@@ -81,14 +82,14 @@
                                             AsyncCallBackWrite func, VOID * params, 
                                             INT32 params_size);
                                                 
-*       This interface is the main entry of business logic.You can implement it 
-		synchronous and asynchronous.The value returned zero indicates success,
-		non zero failed.
+*       This interface is the main entry of the business logics.You can implement it 
+  		synchronous and asynchronous.It returns zero that indicates success, and 
+  		non-zero indicates failure.
 
 #### 2.2.3 MsgHandleFinish <a name="MsgHandleFinish"/>
 *       Define: INT32 MsgHandleFinish();
-*       This interface involved by framework when JOB shutdown graceful.You can free 
-		resource allocated by MsgHandleInit.
+*       This interface is called by frameworks when a JOB is shutdown gracefully.You can set free 
+		resources allocated by MsgHandleInit.
 
 
 ## 3 Dependence <a name="dependence"/>
